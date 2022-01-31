@@ -255,7 +255,7 @@ func (tx *DB) assignInterfacesToValue(values ...interface{}) {
 		}
 	}
 }
-
+// FirstOrInit get the first matched record or initialize a new instance with given conditions (only works with struct or map conditions)
 func (db *DB) FirstOrInit(dest interface{}, conds ...interface{}) (tx *DB) {
 	queryTx := db.Limit(1).Order(clause.OrderByColumn{
 		Column: clause.Column{Table: clause.CurrentTable, Name: clause.PrimaryKey},
@@ -281,6 +281,7 @@ func (db *DB) FirstOrInit(dest interface{}, conds ...interface{}) (tx *DB) {
 	return
 }
 
+// FirstOrCreate get the first matched record or create a new one with given conditions (only works with struct, map conditions)
 func (db *DB) FirstOrCreate(dest interface{}, conds ...interface{}) (tx *DB) {
 	queryTx := db.Limit(1).Order(clause.OrderByColumn{
 		Column: clause.Column{Table: clause.CurrentTable, Name: clause.PrimaryKey},
